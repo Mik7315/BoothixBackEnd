@@ -1,4 +1,4 @@
-package be.boothix.boothix_backend;
+package be.boothix;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

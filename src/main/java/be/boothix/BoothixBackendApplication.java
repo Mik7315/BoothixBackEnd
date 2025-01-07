@@ -1,4 +1,4 @@
-package be.boothix.boothix_backend;
+package be.boothix;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
