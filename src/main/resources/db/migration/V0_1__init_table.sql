@@ -32,9 +32,7 @@ CREATE TABLE clients(
    UNIQUE(denomination),
    UNIQUE(vat_number),
    UNIQUE(bce_number),
-   UNIQUE(email),
-   FOREIGN KEY(created_by) REFERENCES users(id_user),
-   FOREIGN KEY(modified_by) REFERENCES users(id_user)
+   UNIQUE(email)
 );
 
 CREATE TABLE options(
@@ -94,9 +92,7 @@ CREATE TABLE reservations(
 
    PRIMARY KEY(id_reservation),
    FOREIGN KEY(id_device) REFERENCES devices(id_device),
-   FOREIGN KEY(id_client) REFERENCES clients(id_client),
-   FOREIGN KEY(created_by) REFERENCES users(id_user),
-   FOREIGN KEY(modified_by) REFERENCES users(id_user)
+   FOREIGN KEY(id_client) REFERENCES clients(id_client)
 );
 
 CREATE TABLE options_reservations(
