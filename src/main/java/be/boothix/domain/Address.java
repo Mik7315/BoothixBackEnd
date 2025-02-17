@@ -6,10 +6,10 @@ import jakarta.persistence.Embeddable;
 public class Address {
 
     private String street;
-    private String house_number;
+    private String houseNumber;
     private String box;
     private String city;
-    private String zip_code;
+    private String zipCode;
     private String country;
 
 
