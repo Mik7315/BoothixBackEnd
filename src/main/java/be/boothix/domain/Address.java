@@ -1,7 +1,11 @@
 package be.boothix.domain;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.Embeddable;
+import lombok.Getter;
 
+@Getter
+@JsonSerialize
 @Embeddable
 public class Address {
 
@@ -12,5 +16,5 @@ public class Address {
     private String zipCode;
     private String country;
 
-
+    public Address() {}
 }

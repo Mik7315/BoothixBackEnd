@@ -1,0 +1,1 @@
+create sequence hibernate_sequence increment by 1 minvalue 1 maxvalue 999999999999999999 start with 1 no cycle;
