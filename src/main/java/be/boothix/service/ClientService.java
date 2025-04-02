@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 @Transactional
 @Service
 public class ClientService {
-
     private final ClientRepository clientRepository;
 
     public ClientService(ClientRepository clientRepository) {
