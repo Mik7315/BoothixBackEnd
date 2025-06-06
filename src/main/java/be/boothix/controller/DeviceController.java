@@ -6,6 +6,8 @@ import be.boothix.service.DeviceService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin(origins = "*", exposedHeaders = "Location")
 @RestController
 @RequestMapping(value = "/api/device")
@@ -22,4 +24,7 @@ public class DeviceController {
 
         return ResponseEntity.ok(createdDeviceDTO);
     }
+
+    @GetMapping
+    public List<DeviceDTO> getAllDevices() { return this.deviceService.getAllDevices(); }
 }
