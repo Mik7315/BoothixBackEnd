@@ -6,6 +6,8 @@ import be.boothix.service.ClientService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin(origins = "*", exposedHeaders = "Location")
 @RestController
 @RequestMapping(value = "/api/client")
@@ -24,4 +26,7 @@ public class ClientController {
 
         return ResponseEntity.ok(createdClientDTO);
     }
+
+    @GetMapping
+    public List<ClientDTO> getAll() { return this.clientService.getAllClients(); }
 }

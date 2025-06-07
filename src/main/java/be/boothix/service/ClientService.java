@@ -6,6 +6,9 @@ import be.boothix.repository.ClientRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Transactional
 @Service
 public class ClientService {
@@ -19,5 +22,9 @@ public class ClientService {
         Client client = new Client(null, clientDTO.getType(), clientDTO.getFirstName(), clientDTO.getLastName(), clientDTO.getDenomination(), clientDTO.getVatNumber(), clientDTO.getBceNumber(), clientDTO.getPhoneNumber(), clientDTO.getEmail(), clientDTO.getAddress());
 
         return clientRepository.save(client);
+    }
+
+    public List<ClientDTO> getAllClients() {
+        return this.clientRepository.findAll().stream().map(ClientDTO::new).collect(Collectors.toList());
     }
 }
