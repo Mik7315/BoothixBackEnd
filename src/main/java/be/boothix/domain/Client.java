@@ -25,9 +25,7 @@ public class Client extends AuditEntity {
     @Embedded
     private Address address;
 
-    public Client() {
-
-    }
+    public Client() { }
 
     public Client(Long idClient, ClientTypeEnum type, String firstName, String lastName, String denomination, String vatNumber, String bceNumber, String phoneNumber, String email, Address address) {
         this.idClient = idClient;

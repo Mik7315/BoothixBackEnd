@@ -18,9 +18,7 @@ public class Device {
     @Enumerated(EnumType.STRING)
     private DeviceTypeEnum type;
 
-    public Device() {
-
-    }
+    public Device() { }
 
     public Device(Long idDevice, String name, String description, DeviceTypeEnum type) {
         this.idDevice = idDevice;

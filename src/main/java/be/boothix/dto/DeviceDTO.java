@@ -13,9 +13,7 @@ public class DeviceDTO {
     private String description;
     private DeviceTypeEnum type;
 
-    public DeviceDTO() {
-
-    }
+    public DeviceDTO() { }
 
     public DeviceDTO(Device device) {
         this.idDevice = device.getIdDevice();

@@ -21,9 +21,7 @@ public class Formula {
     @JoinColumn(name = "id_device")
     private Device device;
 
-    public Formula() {
-
-    }
+    public Formula() { }
 
     public Formula(Long idFormula, String name, String description, Long price, Device device) {
         this.idFormula = idFormula;

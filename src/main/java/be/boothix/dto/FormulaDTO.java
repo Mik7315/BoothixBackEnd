@@ -14,9 +14,7 @@ public class FormulaDTO {
     private Long price;
     private Device device;
 
-    public FormulaDTO() {
-
-    }
+    public FormulaDTO() { }
 
     public FormulaDTO(Formula formula) {
         this.idFormula = formula.getIdFormula();
