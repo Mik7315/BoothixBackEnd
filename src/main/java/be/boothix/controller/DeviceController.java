@@ -25,6 +25,18 @@ public class DeviceController {
         return ResponseEntity.ok(createdDeviceDTO);
     }
 
+    @PutMapping
+    public ResponseEntity<DeviceDTO> update(@RequestBody DeviceDTO deviceDTO) {
+        Device device = this.deviceService.updateDevice(deviceDTO);
+
+        DeviceDTO createdDeviceDTO = new DeviceDTO(device);
+
+        return ResponseEntity.ok(createdDeviceDTO);
+    }
+
     @GetMapping
     public List<DeviceDTO> getAllDevices() { return this.deviceService.getAllDevices(); }
+
+    @GetMapping("/{id}")
+    public DeviceDTO getById(@PathVariable Long id) { return this.deviceService.getDeviceById(id); }
 }
