@@ -6,6 +6,7 @@ import be.boothix.repository.OptionRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,6 +24,6 @@ public class OptionService {
     }
 
     public List<OptionDTO> getAllOptions() {
-        return this.optionRepository.findAll().stream().map(OptionDTO::new).collect(Collectors.toList());
+        return this.optionRepository.findAll().stream().sorted(Comparator.comparing((Option::getIdOption))).map(OptionDTO::new).collect(Collectors.toList());
     }
 }

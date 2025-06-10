@@ -6,6 +6,7 @@ import be.boothix.repository.DeviceRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,6 +24,6 @@ public class DeviceService {
     }
 
     public List<DeviceDTO> getAllDevices() {
-        return this.deviceRepository.findAll().stream().map(DeviceDTO::new).collect(Collectors.toList());
+        return this.deviceRepository.findAll().stream().sorted(Comparator.comparing((Device::getIdDevice))).map(DeviceDTO::new).collect(Collectors.toList());
     }
 }

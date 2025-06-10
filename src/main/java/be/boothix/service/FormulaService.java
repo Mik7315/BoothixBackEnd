@@ -6,6 +6,7 @@ import be.boothix.repository.FormulaRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,6 +28,6 @@ public class FormulaService {
     //}
 
     public List<FormulaDTO> getAllFormulas() {
-        return formulaRepository.findAll().stream().map(FormulaDTO::new).collect(Collectors.toList());
+        return formulaRepository.findAll().stream().sorted(Comparator.comparing((Formula::getIdFormula))).map(FormulaDTO::new).collect(Collectors.toList());
     }
 }

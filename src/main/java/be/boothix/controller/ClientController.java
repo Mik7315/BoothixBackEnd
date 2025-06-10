@@ -27,6 +27,20 @@ public class ClientController {
         return ResponseEntity.ok(createdClientDTO);
     }
 
+    @PutMapping
+    public ResponseEntity<ClientDTO> update(@RequestBody ClientDTO clientDTO) {
+        Client client = this.clientService.updateClient(clientDTO);
+
+        ClientDTO createdClientDTO = new ClientDTO(client);
+
+        return ResponseEntity.ok(createdClientDTO);
+    }
+
     @GetMapping
     public List<ClientDTO> getAll() { return this.clientService.getAllClients(); }
+
+    @GetMapping("/{id}")
+    public ClientDTO getById(@PathVariable Long id) {
+        return this.clientService.getClientById(id);
+    }
 }
