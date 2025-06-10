@@ -25,6 +25,18 @@ public class FormulaController {
         return ResponseEntity.ok(createdFormulaDTO);
     }
 
+    @PutMapping
+    public ResponseEntity<FormulaDTO> update(@RequestBody FormulaDTO formulaDTO) {
+        Formula formula = this.formulaService.updateFormula(formulaDTO);
+
+        FormulaDTO createdFormulaDTO = new FormulaDTO(formula);
+
+        return ResponseEntity.ok(createdFormulaDTO);
+    }
+
     @GetMapping
     public List<FormulaDTO> getAllFormulas() { return this.formulaService.getAllFormulas(); }
+
+    @GetMapping("/{id}")
+    public FormulaDTO getById(@PathVariable Long id) { return this.formulaService.getFormulaById(id); }
 }
