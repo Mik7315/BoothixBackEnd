@@ -25,6 +25,18 @@ public class OptionController {
         return ResponseEntity.ok(createdOptionDTO);
     }
 
+    @PutMapping
+    public ResponseEntity<OptionDTO> update(@RequestBody OptionDTO optionDTO) {
+        Option option = this.optionService.updateOption(optionDTO);
+
+        OptionDTO createdOptionDTO = new OptionDTO(option);
+
+        return ResponseEntity.ok(createdOptionDTO);
+    }
+
     @GetMapping
     public List<OptionDTO> getAllOptions() { return this.optionService.getAllOptions(); }
+
+    @GetMapping("/{id}")
+    public OptionDTO getById(@PathVariable Long id) { return this.optionService.getOptionById(id); }
 }
