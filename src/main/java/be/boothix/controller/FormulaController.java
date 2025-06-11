@@ -35,7 +35,7 @@ public class FormulaController {
     }
 
     @GetMapping
-    public List<FormulaDTO> getAllFormulas() { return this.formulaService.getAllFormulas(); }
+    public List<FormulaDTO> getAll() { return this.formulaService.getAllFormulas(); }
 
     @GetMapping("/{id}")
     public FormulaDTO getById(@PathVariable Long id) { return this.formulaService.getFormulaById(id); }
