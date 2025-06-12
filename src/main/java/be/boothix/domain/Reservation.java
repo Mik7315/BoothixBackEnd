@@ -10,7 +10,6 @@ import java.util.List;
 
 @Getter
 @Setter
-@Builder
 @Entity
 @Table(name = "reservations")
 public class Reservation extends AuditEntity {

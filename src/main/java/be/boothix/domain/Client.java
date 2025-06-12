@@ -7,7 +7,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Builder
 @Entity
 @Table(name = "clients")
 public class Client extends AuditEntity {
