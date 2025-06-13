@@ -1,1 +1,0 @@
-ALTER TABLE reservations DROP COLUMN id_device;
