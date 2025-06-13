@@ -1,8 +1,10 @@
 package be.boothix.service;
 
 import be.boothix.domain.Client;
+import be.boothix.domain.Reservation;
 import be.boothix.dto.ClientDTO;
 import be.boothix.repository.ClientRepository;
+import be.boothix.repository.ReservationRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -16,8 +18,12 @@ import java.util.stream.Collectors;
 @Service
 public class ClientService {
     private final ClientRepository clientRepository;
+    private final ReservationRepository reservationRepository;
 
-    public ClientService(ClientRepository clientRepository) { this.clientRepository = clientRepository; }
+    public ClientService(ClientRepository clientRepository, ReservationRepository reservationRepository) {
+        this.clientRepository = clientRepository;
+        this.reservationRepository = reservationRepository;
+    }
 
     public Client createClient(ClientDTO clientDTO) {
         Client client = new Client(null, clientDTO.getType(), clientDTO.getFirstName(), clientDTO.getLastName(), clientDTO.getDenomination(), clientDTO.getVatNumber(), clientDTO.getBceNumber(), clientDTO.getPhoneNumber(), clientDTO.getEmail(), clientDTO.getAddress());
@@ -79,5 +85,15 @@ public class ClientService {
 
     public ClientDTO getClientById(Long id) {
         return this.clientRepository.findById(id).stream().map(ClientDTO::new).findFirst().get();
+    }
+
+    public void deleteClient(Long clientId) {
+        if (clientId != null) {
+            List<Reservation> reservations = reservationRepository.findReservationByClient_IdClient(clientId);
+
+            if (!reservations.isEmpty()) {
+                clientRepository.deleteById(clientId);
+            }
+        }
     }
 }
