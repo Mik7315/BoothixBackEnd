@@ -1,8 +1,10 @@
 package be.boothix.service;
 
 import be.boothix.domain.Device;
+import be.boothix.domain.Formula;
 import be.boothix.dto.DeviceDTO;
 import be.boothix.repository.DeviceRepository;
+import be.boothix.repository.FormulaRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -15,8 +17,12 @@ import java.util.stream.Collectors;
 @Service
 public class DeviceService {
     private final DeviceRepository deviceRepository;
+    private final FormulaRepository formulaRepository;
 
-    public DeviceService(DeviceRepository deviceRepository) { this.deviceRepository = deviceRepository; }
+    public DeviceService(DeviceRepository deviceRepository, FormulaRepository formulaRepository) {
+        this.deviceRepository = deviceRepository;
+        this.formulaRepository = formulaRepository;
+    }
 
     public Device createDevice(DeviceDTO deviceDTO) {
         Device device = new Device(null, deviceDTO.getName(), deviceDTO.getDescription(), deviceDTO.getType());
@@ -45,5 +51,15 @@ public class DeviceService {
 
     public DeviceDTO getDeviceById(Long id) {
         return this.deviceRepository.findById(id).stream().map(DeviceDTO::new).findFirst().get();
+    }
+
+    public void deleteDevice(Long deviceId) {
+        if (deviceId != null) {
+            List<Formula> formulas = formulaRepository.findFormulaByDevice_IdDevice(deviceId);
+
+            if(formulas.isEmpty()){
+                deviceRepository.deleteById(deviceId);
+            }
+        }
     }
 }

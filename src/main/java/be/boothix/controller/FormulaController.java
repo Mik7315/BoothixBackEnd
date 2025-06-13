@@ -39,4 +39,9 @@ public class FormulaController {
 
     @GetMapping("/{id}")
     public FormulaDTO getById(@PathVariable Long id) { return this.formulaService.getFormulaById(id); }
+    
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteById(@PathVariable Long id) {
+        this.formulaService.delete(id);
+    }
 }

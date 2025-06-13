@@ -91,7 +91,7 @@ public class ClientService {
         if (clientId != null) {
             List<Reservation> reservations = reservationRepository.findReservationByClient_IdClient(clientId);
 
-            if (!reservations.isEmpty()) {
+            if (reservations.isEmpty()) {
                 clientRepository.deleteById(clientId);
             }
         }

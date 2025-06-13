@@ -39,4 +39,10 @@ public class DeviceController {
 
     @GetMapping("/{id}")
     public DeviceDTO getById(@PathVariable Long id) { return this.deviceService.getDeviceById(id); }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteById(@PathVariable Long id) {
+        this.deviceService.deleteDevice(id);
+        return ResponseEntity.ok().build();
+    }
 }

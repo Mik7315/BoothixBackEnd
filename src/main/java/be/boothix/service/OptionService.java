@@ -1,6 +1,8 @@
 package be.boothix.service;
 
+import be.boothix.domain.Formula;
 import be.boothix.domain.Option;
+import be.boothix.domain.Reservation;
 import be.boothix.dto.OptionDTO;
 import be.boothix.repository.OptionRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Transactional
@@ -45,5 +48,26 @@ public class OptionService {
 
     public OptionDTO getOptionById(Long id) {
         return this.optionRepository.findById(id).stream().map(OptionDTO::new).findFirst().get();
+    }
+
+    public void delete(Long idOption) {
+        // Récupère toute les réservations de la DB
+        List<Reservation> reservations = this.reservationRepository.findAll();
+
+        // Récupère les reservations qui contienent un lien vers la formules que je veux supprimer
+        List<Reservation> filteredReservation = reservations
+                .stream()
+                .filter(reservation -> {
+                    // Si la formule que je veux supprimer est présente dans une des formules lié à une réservation, je renvoi true
+                    List<Option> options = reservation.getOptions()
+                            .stream()
+                            .filter(option -> Objects.equals(option.getIdOption(), idOption))
+                            .toList();
+                    return !options.isEmpty();
+                }).toList();
+
+        if (filteredReservation.isEmpty()) {
+            optionRepository.deleteById(idOption);
+        }
     }
 }

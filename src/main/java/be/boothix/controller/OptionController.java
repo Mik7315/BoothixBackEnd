@@ -39,4 +39,10 @@ public class OptionController {
 
     @GetMapping("/{id}")
     public OptionDTO getById(@PathVariable Long id) { return this.optionService.getOptionById(id); }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteById(@PathVariable Long id) {
+        this.optionService.delete(id);
+        return ResponseEntity.ok().build();
+    }
 }

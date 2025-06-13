@@ -70,4 +70,8 @@ public class ReservationService {
         return this.reservationRepository.findById(id).stream()
                 .map(ReservationDTO::new).findFirst().get();
     }
+
+    public void delete(Long id) {
+        this.reservationRepository.deleteById(id);
+    }
 }

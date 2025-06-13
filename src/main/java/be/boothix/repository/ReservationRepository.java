@@ -15,5 +15,4 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     Double sumAllReservationForYear(@Param("year") int year, @Param("month") int month);
 
     List<Reservation> findReservationByClient_IdClient(Long clientIdClient);
-
 }
