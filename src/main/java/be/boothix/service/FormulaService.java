@@ -71,8 +71,9 @@ public class FormulaService {
                     return !formulas.isEmpty();
         }).toList();
         
-        if (filteredReservation.isEmpty()) {
-            formulaRepository.deleteById(idFormula);
+        if (!filteredReservation.isEmpty()) {
+            throw new RuntimeException("La formule est lié à une réservation");
         }
+        formulaRepository.deleteById(idFormula);
     }
 }

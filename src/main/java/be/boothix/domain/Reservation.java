@@ -14,7 +14,7 @@ import java.util.List;
 @Table(name = "reservations")
 public class Reservation extends AuditEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "global_seq")
     @SequenceGenerator(name = "global_seq", sequenceName = "hibernate_sequence", allocationSize = 1)
     private Long idReservation;
     private String phoneNumber;
@@ -72,5 +72,14 @@ public class Reservation extends AuditEntity {
         this.client = client;
         this.options = options;
         this.formulas = formulas;
+    }
+
+    public void close(String galleryLink) {
+        this.galleryLink = galleryLink;
+        this.status = ReservationStatusEnum.CLOSED;
+    }
+
+    public void cancel() {
+        this.status = ReservationStatusEnum.CANCELLED;
     }
 }

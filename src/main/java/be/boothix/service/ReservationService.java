@@ -71,6 +71,14 @@ public class ReservationService {
                 .map(ReservationDTO::new).findFirst().get();
     }
 
+    public void close(Long id, String galleryLink) {
+        this.reservationRepository.findById(id).ifPresent(reservation -> reservation.close(galleryLink));
+    }
+
+    public void cancel(Long id) {
+        this.reservationRepository.findById(id).ifPresent(reservation -> reservation.cancel());
+    }
+
     public void delete(Long id) {
         this.reservationRepository.deleteById(id);
     }

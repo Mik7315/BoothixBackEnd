@@ -91,9 +91,10 @@ public class ClientService {
         if (clientId != null) {
             List<Reservation> reservations = reservationRepository.findReservationByClient_IdClient(clientId);
 
-            if (reservations.isEmpty()) {
-                clientRepository.deleteById(clientId);
+            if (!reservations.isEmpty()) {
+                throw new RuntimeException("Le client est lié à une réservation");
             }
+            clientRepository.deleteById(clientId);
         }
     }
 }

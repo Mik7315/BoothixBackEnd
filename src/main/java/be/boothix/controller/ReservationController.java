@@ -1,6 +1,7 @@
 package be.boothix.controller;
 
 import be.boothix.domain.Reservation;
+import be.boothix.dto.ReservationCloseDTO;
 import be.boothix.dto.ReservationDTO;
 import be.boothix.service.ReservationService;
 import org.springframework.http.ResponseEntity;
@@ -40,6 +41,18 @@ public class ReservationController {
     @GetMapping("/{id}")
     public ReservationDTO getById(@PathVariable Long id) {
         return this.reservationService.getReservationById(id);
+    }
+
+    @PutMapping("/close")
+    public ResponseEntity<Void> close(@RequestBody ReservationCloseDTO reservationCloseDTO) {
+        this.reservationService.close(reservationCloseDTO.getIdReservation(), reservationCloseDTO.getGalleryLink());
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/cancel/{id}")
+    public ResponseEntity<Void> cancel(@PathVariable Long id) {
+        this.reservationService.cancel(id);
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")

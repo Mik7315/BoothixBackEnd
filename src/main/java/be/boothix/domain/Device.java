@@ -11,7 +11,7 @@ import lombok.Setter;
 @Table(name = "devices")
 public class Device {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "global_seq")
     @SequenceGenerator(name = "global_seq", sequenceName = "hibernate_sequence", allocationSize = 1)
     private Long idDevice;
     private String name;

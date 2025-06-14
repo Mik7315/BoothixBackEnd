@@ -13,7 +13,7 @@ import lombok.Setter;
 public class Formula {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "global_seq")
     @SequenceGenerator(name = "global_seq", sequenceName = "hibernate_sequence", allocationSize = 1)
     private Long idFormula;
     private String name;

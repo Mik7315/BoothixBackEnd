@@ -1,10 +1,10 @@
 package be.boothix.service;
 
-import be.boothix.domain.Formula;
 import be.boothix.domain.Option;
 import be.boothix.domain.Reservation;
 import be.boothix.dto.OptionDTO;
 import be.boothix.repository.OptionRepository;
+import be.boothix.repository.ReservationRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -18,8 +18,12 @@ import java.util.stream.Collectors;
 @Service
 public class OptionService {
     private final OptionRepository optionRepository;
+    private final ReservationRepository reservationRepository;
 
-    public OptionService(OptionRepository optionRepository) { this.optionRepository = optionRepository; }
+    public OptionService(OptionRepository optionRepository, ReservationRepository reservationRepository) {
+        this.optionRepository = optionRepository;
+        this.reservationRepository = reservationRepository;
+    }
 
     public Option createOption(OptionDTO optionDTO) {
         Option option = new Option(null, optionDTO.getName(), optionDTO.getDescription(), optionDTO.getPrice());
@@ -66,8 +70,9 @@ public class OptionService {
                     return !options.isEmpty();
                 }).toList();
 
-        if (filteredReservation.isEmpty()) {
-            optionRepository.deleteById(idOption);
+        if (!filteredReservation.isEmpty()) {
+            throw new RuntimeException("L'option est liée à une réservation");
         }
+        optionRepository.deleteById(idOption);
     }
 }

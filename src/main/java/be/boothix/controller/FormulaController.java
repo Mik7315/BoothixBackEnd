@@ -43,5 +43,6 @@ public class FormulaController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         this.formulaService.delete(id);
+        return ResponseEntity.ok().build();
     }
 }

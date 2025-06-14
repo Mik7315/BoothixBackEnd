@@ -57,9 +57,10 @@ public class DeviceService {
         if (deviceId != null) {
             List<Formula> formulas = formulaRepository.findFormulaByDevice_IdDevice(deviceId);
 
-            if(formulas.isEmpty()){
-                deviceRepository.deleteById(deviceId);
+            if(!formulas.isEmpty()){
+                throw new RuntimeException("L'appareil est lié à une formule");
             }
+            deviceRepository.deleteById(deviceId);
         }
     }
 }
